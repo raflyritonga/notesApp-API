@@ -1,0 +1,25 @@
+{
+  "name": "notesapp-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raflyritonga/notesApp-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raflyritonga/notesApp-backend/issues"
+  },
+  "homepage": "https://github.com/raflyritonga/notesApp-backend#readme",
+  "dependencies": {
+    "@hapi/hapi": "^21.3.2",
+    "nanoid": "^5.0.2",
+    "nodemon": "^3.0.1"
+  }
+}
