@@ -1,20 +1,29 @@
 const Hapi = require('@hapi/hapi');
-const routes = require('./routes');
+const notes = require('./api/notes-plugin');
+const NotesService = require('./services/inMemory/NotesService')
 
-const init = async () => {
+const init = async() => {
+  const notesService =  new NotesService()
+  
   const server = Hapi.server({
     port: 8000,
-    host: 'localhost',
-    // kode di bawah ini berguna untuk memungkinkan server untuk mengakses origin yang berbeda. dan mengatasi masalah same-origin policy
+    host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
     routes: {
       cors: {
         origin: ['*'],
       },
     },
+  })
 
-  });
-  server.route(routes);
-  await server.start();
-  console.info(`Server berjalan pada ${server.info.uri}`);
-};
-init();
+  await server.register({
+    plugin: notes,
+    options: {
+      service: notesService,
+    },
+  })
+  
+  await server.start()
+  console.log(`Server berjalan pada ${server.info.uri}`)
+}
+
+init()
